@@ -1,0 +1,139 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  
+  provider = "postgresql"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  role      String   @default("admin")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SiteSettings {
+  id          String @id @default("singleton")
+  siteName    String @default("TrackForce")
+  siteUrl     String @default("https://trackforce.io")
+  logoUrl     String @default("/trackforce_logo.png")
+  description String @default("")
+  updatedAt   DateTime @updatedAt
+}
+
+model PageContent {
+  id        String   @id @default(cuid())
+  page      String
+  section   String
+  key       String
+  value     String
+  type      String   @default("text")
+  active    Boolean  @default(true)
+  label     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([page, section, key])
+  @@index([page, section, active])
+}
+
+model BlogPost {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  title     String
+  excerpt   String
+  content   String
+  image     String
+  tag       String
+  author    String
+  date      String
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  name      String
+  role      String
+  company   String
+  avatar    String
+  text      String
+  rating    Int      @default(5)
+  type      String   @default("text")
+  videoUrl  String?
+  order     Int      @default(0)
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model FaqItem {
+  id        String   @id @default(cuid())
+  page      String
+  question  String
+  answer    String
+  order     Int      @default(0)
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model TeamMember {
+  id        String   @id @default(cuid())
+  name      String
+  role      String
+  avatar    String
+  order     Int      @default(0)
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model TrackForceSection {
+  id            String   @id @default(cuid())
+  badge         String   @default("")
+  heading       String   @default("")
+  description   String   @default("")
+  feature1Title String   @default("")
+  feature1Desc  String   @default("")
+  feature2Title String   @default("")
+  feature2Desc  String   @default("")
+  feature3Title String   @default("")
+  feature3Desc  String   @default("")
+  image1        String   @default("")
+  image2        String   @default("")
+  image3        String   @default("")
+  ctaText       String   @default("See how it works")
+  ctaUrl        String   @default("/documentation")
+  order         Int      @default(0)
+  active        Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model SliderLogo {
+  id        String   @id @default(cuid())
+  image     String
+  url       String   @default("#")
+  alt       String   @default("")
+  order     Int      @default(0)
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model MediaFile {
+  id        String   @id @default(cuid())
+  name      String
+  url       String
+  size      Int
+  mimeType  String
+  usedIn    String?
+  createdAt DateTime @default(now())
+}
