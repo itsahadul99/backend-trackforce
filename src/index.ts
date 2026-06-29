@@ -23,7 +23,7 @@ app.use(
   cors({
     origin: [
       process.env.ADMIN_FRONTEND_URL || "http://localhost:3001",
-      process.env.PORTFOLIO_URL || "http://localhost:3000",
+      process.env.PORTFOLIO_URL || "http://localhost:3000" || "https://trackforce-portfolio.vercel.app",
     ],
     credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
