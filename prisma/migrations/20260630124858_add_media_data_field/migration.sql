@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "MediaFile" ADD COLUMN "data" BYTEA NOT NULL DEFAULT '';
+ALTER TABLE "MediaFile" ALTER COLUMN "data" DROP DEFAULT;

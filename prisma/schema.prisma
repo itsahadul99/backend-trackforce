@@ -134,6 +134,7 @@ model MediaFile {
   url       String
   size      Int
   mimeType  String
+  data      Bytes
   usedIn    String?
   createdAt DateTime @default(now())
 }

@@ -2,7 +2,6 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import "dotenv/config";
 import express from "express";
-import path from "path";
 
 import authRoutes from "./routes/auth";
 import blogRoutes from "./routes/blog";
@@ -34,7 +33,7 @@ app.use(
 );
 
 // Wide-open CORS for public API routes (portfolio site fetches these)
-app.use("/api/public", (_req, res, next) => {
+app.use(["/api/public", "/api/media/file"], (_req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
@@ -43,7 +42,6 @@ app.use("/api/public", (_req, res, next) => {
 
 app.use(cookieParser());
 app.use(express.json());
-app.use(express.static(path.join(process.cwd(), "public")));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/blog", blogRoutes);
