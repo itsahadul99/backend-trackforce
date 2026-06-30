@@ -57,6 +57,10 @@ app.use("/api/testimonials", testimonialsRoutes);
 app.use("/api/settings", settingsRoutes);
 app.use("/api/public", publicRoutes);
 
+app.get("/", (_req, res) => {
+  res.json({ status: "ok", message: "Trackforce Portfolio Backend is running 🚀" });
+});
+
 app.listen(PORT, () => {
   console.log(`Backend running on http://localhost:${PORT}`);
 });
