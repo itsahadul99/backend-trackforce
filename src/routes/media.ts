@@ -39,7 +39,6 @@ router.post("/", upload.single("file"), async (req, res) => {
   }
 
   const { originalname, size, mimetype, buffer } = req.file;
-  const data = Uint8Array.from(buffer);
 
   const placeholder = await prisma.mediaFile.create({
     data: {
@@ -47,7 +46,7 @@ router.post("/", upload.single("file"), async (req, res) => {
       url: "",
       size,
       mimeType: mimetype,
-      data,
+      data: Buffer.from(buffer),
     },
   });
 
