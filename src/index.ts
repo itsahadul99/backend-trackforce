@@ -36,7 +36,7 @@ const backend = express();
 backend.use(corsOptions);
 
 // Wide-open CORS for public routes
-backend.use(["/backend/api/public", "/backend/api/media/file"], (_req, res, next) => {
+backend.use(["/api/public", "/api/media/file"], (_req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
@@ -46,17 +46,17 @@ backend.use(["/backend/api/public", "/backend/api/media/file"], (_req, res, next
 backend.use(cookieParser());
 backend.use(express.json());
 
-backend.use("/backend/api/auth", authRoutes);
-backend.use("/backend/api/blog", blogRoutes);
-backend.use("/backend/api/content", contentRoutes);
-backend.use("/backend/api/faqs", faqsRoutes);
-backend.use("/backend/api/how-sections", howSectionsRoutes);
-backend.use("/backend/api/media", mediaRoutes);
-backend.use("/backend/api/slider", sliderRoutes);
-backend.use("/backend/api/team", teamRoutes);
-backend.use("/backend/api/testimonials", testimonialsRoutes);
-backend.use("/backend/api/settings", settingsRoutes);
-backend.use("/backend/api/public", publicRoutes);
+backend.use("/api/auth", authRoutes);
+backend.use("/api/blog", blogRoutes);
+backend.use("/api/content", contentRoutes);
+backend.use("/api/faqs", faqsRoutes);
+backend.use("/api/how-sections", howSectionsRoutes);
+backend.use("/api/media", mediaRoutes);
+backend.use("/api/slider", sliderRoutes);
+backend.use("/api/team", teamRoutes);
+backend.use("/api/testimonials", testimonialsRoutes);
+backend.use("/api/settings", settingsRoutes);
+backend.use("/api/public", publicRoutes);
 
 backend.get("/", (_req, res) => {
   res.json({ status: "ok", message: "Trackforce Portfolio Backend is running 🚀" });
