@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: #{Deployment}#
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1         
+      maxUnavailable: 1 
+  selector:
+    matchLabels:
+      app:   #{Deployment}#
+  template:
+    metadata:
+      labels:
+        app:  #{Deployment}#
+        type:  #{Deployment}#
+    spec:
+      containers:
+      - name:  #{Deployment}#
+        image: iboslimitedbd/#{Deployment}#:#{Build.BuildId}#
+        # Environment variable section
+        resources:
+          requests:
+            cpu: "30m"
+            memory: "64Mi"
+          limits:
+            cpu: "200m"
+            memory: "500Mi" 
+        env:
+        - name: "DATABASE_URL"
+          value: #{DATABASE_URL}#
+        - name:  "NEXTAUTH_SECRET"
+          value:  #{NEXTAUTH_SECRET}#
+        - name:  "ADMIN_BASE_URL"
+          value:  #{ADMIN_BASE_URL}#
+        - name: "ADMIN_FRONTEND_URL"
+          value: #{ADMIN_FRONTEND_URL}#
+        - name:  "PORTFOLIO_URL"
+          value:  #{PORTFOLIO_URL}#
+        - name:  "PORT"
+          value:  #{PORT}#
+      imagePullSecrets:
+      - name: dockercred
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: #{Deployment}#
+spec:
+  selector:
+    app: #{Deployment}#
+  ports:
+  - port: 80
+
+
+          
