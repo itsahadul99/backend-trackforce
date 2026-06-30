@@ -5,7 +5,7 @@ import { Pool } from "pg";
 function createPrismaClient() {
   const pool = new Pool({
     connectionString: process.env.DATABASE_URL!,
-    ssl: true,
+    ssl: { rejectUnauthorized: false },
     connectionTimeoutMillis: 15000,
     idleTimeoutMillis: 30000,
     max: 10,
