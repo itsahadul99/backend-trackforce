@@ -13,13 +13,18 @@ router.get("/file/:id", async (req, res) => {
   res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
 
   const file = await prisma.mediaFile.findUnique({ where: { id: req.params.id } });
-  if (!file || !file.data) {
-    res.status(404).json({ error: "Not found" });
+  if (!file) {
+    res.status(404).json({ error: "File record not found" });
     return;
   }
+  if (!file.data || file.data.length === 0) {
+    res.status(404).json({ error: "File has no data", mimeType: file.mimeType, name: file.name });
+    return;
+  }
+  console.log(`Serving file ${file.id} | type: ${file.mimeType} | size: ${file.data.length} bytes`);
   res.setHeader("Content-Type", file.mimeType);
   res.setHeader("Cache-Control", "public, max-age=31536000");
-  res.send(file.data);
+  res.send(Buffer.from(file.data));
 });
 
 router.use(requireAuth);
