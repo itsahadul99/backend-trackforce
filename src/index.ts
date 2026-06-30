@@ -1,7 +1,7 @@
+import cookieParser from "cookie-parser";
+import cors from "cors";
 import "dotenv/config";
 import express from "express";
-import cors from "cors";
-import cookieParser from "cookie-parser";
 import path from "path";
 
 import authRoutes from "./routes/auth";
@@ -10,11 +10,11 @@ import contentRoutes from "./routes/content";
 import faqsRoutes from "./routes/faqs";
 import howSectionsRoutes from "./routes/how-sections";
 import mediaRoutes from "./routes/media";
+import publicRoutes from "./routes/public";
+import settingsRoutes from "./routes/settings";
 import sliderRoutes from "./routes/slider";
 import teamRoutes from "./routes/team";
 import testimonialsRoutes from "./routes/testimonials";
-import settingsRoutes from "./routes/settings";
-import publicRoutes from "./routes/public";
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -23,7 +23,10 @@ app.use(
   cors({
     origin: [
       process.env.ADMIN_FRONTEND_URL || "http://localhost:3001",
-      process.env.PORTFOLIO_URL || "http://localhost:3000" || "https://trackforce-portfolio.vercel.app",
+      process.env.PORTFOLIO_URL || "http://localhost:3000" || "https://trackforce-portfolio-admin.vercel.app",
+      "http://localhost:3000",
+      "http://localhost:3001",
+      "https://trackforce-portfolio-admin.vercel.app",
     ],
     credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
