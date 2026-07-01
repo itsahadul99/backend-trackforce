@@ -25,6 +25,8 @@ const corsOptions = cors({
     "http://localhost:3000",
     "http://localhost:3001",
     "http://admin.trackforce.io",
+    "https://trackforce-portfolio-admin.vercel.app",
+    "http://portfolio.trackforce.io"
   ],
   credentials: true,
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
